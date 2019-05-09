@@ -76,13 +76,16 @@ function gotLoadingImg() {
 
 function handleDownload() {
   downloadButton = createA("javascript: (void 0)", "Download");
-  downloadButton.mouseClicked(() => {
+  downloadButton.mouseClicked(e => {
     if (!img) return null;
     if (gfile.data.startsWith("http")) {
-      return alert("网络图片手动下载.");
+      return alert("网络图片请手动下载!");
     }
     const dataURL = ctx.canvas.toDataURL(gfile.file.type);
     downloadButton.attribute("download", gfile.name);
     downloadButton.attribute("href", dataURL);
+    setTimeout(() => {
+      downloadButton.attribute("href", "javascript: (void 0)");
+    }, 1000);
   });
 }
